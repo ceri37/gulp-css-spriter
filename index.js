@@ -180,6 +180,11 @@ var spriter = function(options) {
 		//console.log('flush');
 		var self = this;
 
+		if (imagePromiseArray.length === 0) { // nothing changed
+			cb();
+			return;
+		}
+
 		// Create an verified image list when all of the async checks have finished
 		var imagesVerifiedPromise = Promise.settle(imagePromiseArray).then(function(results) {
 			var imageList = [];
